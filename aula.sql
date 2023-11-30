@@ -1,0 +1,77 @@
+
+ 
+ use Aula;
+ 
+
+
+CREATE TABLE Estudiante
+(
+  Apodo VARCHAR(50) NOT NULL,
+  AreaEstudio VARCHAR(50) NOT NULL,
+  Grado VARCHAR(50) NOT NULL,
+  Rut VARCHAR(20) NOT NULL,
+  Nombre VARCHAR(50) NOT NULL,
+  Edad INT NOT NULL,
+  Email VARCHAR(100) NOT NULL,
+  Contrasena VARCHAR(50) NOT NULL,
+  PRIMARY KEY (Rut)
+);
+
+CREATE TABLE Docente
+(
+  Especialidad VARCHAR(50) NOT NULL,
+  NivelEducativo VARCHAR(50) NOT NULL,
+  Rut VARCHAR(20) NOT NULL,
+  Nombre VARCHAR(50) NOT NULL,
+  Edad INT NOT NULL,
+  Email VARCHAR(100) NOT NULL,
+  Contrasena VARCHAR(50) NOT NULL,
+  PRIMARY KEY (Rut)
+);
+
+CREATE TABLE Curso
+(
+  Sigla VARCHAR(10) NOT NULL,
+  Area VARCHAR(50) NOT NULL,
+  Rut VARCHAR(20) NOT NULL,
+  PRIMARY KEY (Sigla),
+  FOREIGN KEY (Rut) REFERENCES Docente(Rut)
+);
+
+CREATE TABLE Pertenece
+(
+  Rut VARCHAR(20) NOT NULL,
+  Sigla VARCHAR(10) NOT NULL,
+  PRIMARY KEY (Rut, Sigla),
+  FOREIGN KEY (Rut) REFERENCES Estudiante(Rut),
+  FOREIGN KEY (Sigla) REFERENCES Curso(Sigla)
+);
+
+CREATE TABLE Material
+(
+  IdMaterial VARCHAR(255) NOT NULL,
+  Link VARCHAR(255) NOT NULL,
+  Fecha VARCHAR(20) NOT NULL,
+  Titulo VARCHAR(100) NOT NULL,
+  Sigla VARCHAR(10) NOT NULL,
+  PRIMARY KEY (IdMaterial),
+  FOREIGN KEY (Sigla) REFERENCES Curso(Sigla)
+);
+
+CREATE TABLE Reunion
+(
+  IdReunion VARCHAR(255) NOT NULL,
+  Mensaje VARCHAR(255) NOT NULL,
+  LinkReunion VARCHAR(255) NOT NULL,
+  FechaReunion VARCHAR(25) NOT NULL,
+  Estado VARCHAR(255) NOT NULL,
+  Sigla VARCHAR(10) NOT NULL,
+  PRIMARY KEY (IdReunion),
+  FOREIGN KEY (Sigla) REFERENCES Curso(Sigla)
+);
+
+
+
+
+ #jdbc:mysql://localhost:3306/Aula
+ 
